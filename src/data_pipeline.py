@@ -57,3 +57,6 @@ def get_thumbnail(shopping_dict: dict = None, keywords: str = None) -> dict:
 
     return shopping_dict
 
+
+def get_ikea_data():
+    return True
