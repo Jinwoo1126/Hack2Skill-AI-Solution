@@ -1,4 +1,4 @@
-iimport os
+import os
 import json
 from dotenv import load_dotenv
 from src.data_pipeline import get_shopping_data, get_thumbnail, get_ikea_data
