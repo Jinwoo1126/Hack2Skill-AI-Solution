@@ -1,4 +1,3 @@
-
 import os
 from serpapi import search
 from urllib import request
@@ -57,3 +56,38 @@ def get_thumbnail(shopping_dict: dict = None, keywords: str = None) -> dict:
 
     return shopping_dict
 
+
+def get_ikea_data(data_path):
+    df = pd.read_csv(os.path.join(data_path, 'IKEA.csv'))
+    data_save_path = "{}/images".format(data_path)
+    meta_dict = {}
+    make_dirs(data_save_path)
+            
+    for idx in tqdm(range(df.shape[0])):
+        item_id = df.loc[idx,'item_id']
+        name = df.loc[idx,'name']
+        link = df.loc[idx,'link']
+        try:
+            page = requests.get(link)
+            soup = bs(page.text, "html.parser")
+            image_tag =  soup.find('div', {"class": "pip-product-gallery__media pip-product-gallery__media--active"}).find('img')
+            image_url = image_tag.get('src')
+            response = requests.get(image_url)
+        
+            with open('{}/{}_{}.jpg'.format(data_save_path, item_id, name), 'wb') as f:
+                f.write(response.content)
+            
+            meta_dict["{}_{}".format(item_id, name)] = {
+                "link" : link,
+                "category" : df.loc[idx, 'category'],
+                "price" : df.loc[idx, 'price'],
+                "old_price" : df.loc[idx, 'old_price'],
+                "designer" : df.loc[idx, 'designer'],
+                "depth" : str(df.loc[idx, ['depth']].fillna(0).values[0]),
+                "height" : str(df.loc[idx, ['height']].fillna(0).values[0]),
+                "width" : str(df.loc[idx, ['width']].fillna(0).values[0])
+            }
+        except:
+            continue
+        
+    return meta_dict

@@ -1,7 +1,7 @@
 import os
 import json
 from dotenv import load_dotenv
-from src.data_pipeline import get_shopping_data, get_thumbnail
+from src.data_pipeline import get_shopping_data, get_thumbnail, get_ikea_data
 
 # load .env
 load_dotenv()
@@ -24,5 +24,10 @@ for shopping_result in shopping_results:
 # save the shopping results to a JSON file
 with open('data/'+ keyword +'_shopping_results.json', 'w') as f:
     json.dump(shopping_results, f, indent=4)
+
+# ikea_dataset 
+ikea_meta = get_ikea_data('data/ikea')
+with open('data/ikea/ikea_results.json', 'w') as f:
+    json.dump(ikea_meta, f, indent=4)
 
     
