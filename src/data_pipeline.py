@@ -1,6 +1,8 @@
 import os
+import pandas as pd
 from serpapi import search
 from urllib import request
+from .utils import rm_background
 
 
 def get_shopping_data(query:str=None, api_key:str=None, **kwargs) -> dict:
@@ -44,13 +46,17 @@ def get_thumbnail(shopping_dict: dict = None, keywords: str = None) -> dict:
     """
     url = shopping_dict['thumbnail']
     savepath = os.path.join('data', keywords, 'thumbnails')
+    nobg_savepath = os.path.join('data', keywords, 'thumbnails_nobg')
     if not os.path.exists(savepath):
-        os.makedirs(savepath)
+        os.makedirs(savepath, exist_ok=True)
+        os.makedirs(nobg_savepath, exist_ok=True)
     savename = os.path.join(savepath, str(shopping_dict['position']) + '.jpg')
+    nobg_savename = os.path.join(nobg_savepath, str(shopping_dict['position']) + '.jpg')
     shopping_dict['thumbnail'] = savename
 
     try:
         request.urlretrieve(url, savename)
+        rm_background(savename, nobg_savename)
     except Exception as e:
         print(e)
 
@@ -61,7 +67,7 @@ def get_ikea_data(data_path):
     df = pd.read_csv(os.path.join(data_path, 'IKEA.csv'))
     data_save_path = "{}/images".format(data_path)
     meta_dict = {}
-    make_dirs(data_save_path)
+    os.makedirs(data_save_path)
             
     for idx in tqdm(range(df.shape[0])):
         item_id = df.loc[idx,'item_id']

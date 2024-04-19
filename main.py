@@ -11,7 +11,6 @@ API_KEYS = {
     'SERP_API': os.environ.get('SERP_API')
 }
 
-# load config.json
 with open('config.json', 'r') as f:
     config = json.load(f)
 
@@ -30,8 +29,10 @@ for keyword in config['list_of_furnitures']:
         json.dump(shopping_results, f, indent=4)
 
 # ikea_dataset 
+        
+'''
 ikea_meta = get_ikea_data('data/ikea')
 with open('data/ikea/ikea_results.json', 'w') as f:
     json.dump(ikea_meta, f, indent=4)
-
+'''
     
