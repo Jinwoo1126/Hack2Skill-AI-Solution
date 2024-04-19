@@ -11,7 +11,6 @@ API_KEYS = {
     'SERP_API': os.environ.get('SERP_API')
 }
 
-# load config
 with open('config.json', 'r') as f:
     config = json.load(f)
 
