@@ -38,8 +38,9 @@ st.set_page_config(
 st.sidebar.header("About")
 st.sidebar.markdown("setting arguments")
 max_item = st.sidebar.slider('Max Items', 5, 10, 5, 5)
-threshold = st.sidebar.slider('Distance Threshold', 0.0, 1.0, 0.5, 0.05)
 search_type = st.sidebar.radio(label = 'Search Type', options = ['Image', 'Text'])
+default_thr = 0.5 if search_type == 'Image' else 0.1
+threshold = st.sidebar.slider('Distance Threshold', 0.0, 1.0, default_thr, 0.05)
 st.sidebar.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
 
 st.title("[Hack2Skill] AI Solution Team")
@@ -81,19 +82,14 @@ if len(objects):
         )
         
         html = convert_df(response)
-        
-        st.write("")
-        if len(generated_text):
-            st.write(f"search keword: {generated_text['keyword']}")
-            st.write(f"reason: {generated_text['reason']}")
-        st.write("Recommended Items :")
-        if len(results):
-            st.markdown(html, unsafe_allow_html=True)
-        else:
-            st.write("Sorry! ")
 
-        # if len(results):
-        #     st.write("")
-        #     st.image(results, width=200)
-        # else:
-        #     st.write("죄송합니다! 검색 쿼리와 일치하는 이미지가 없습니다. 다시 시도해 주세요.")
+        with st.expander("Recommendation Results"):
+            st.write("")
+            if len(generated_text):
+                st.markdown(f"`search keword`: {generated_text['keyword']}")
+                st.markdown(f"`reason`: {generated_text['reason']}")
+            st.markdown("**Recommended Items**")
+            if len(results):
+                st.markdown(html, unsafe_allow_html=True)
+            else:
+                st.write("Sorry! ")

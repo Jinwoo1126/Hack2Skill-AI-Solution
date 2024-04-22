@@ -118,7 +118,10 @@ def get_result_table(args, result):
     return result_df[['ITEM', 'ITEM_ID', 'NAME', 'CATEGORY', 'PRICE', 'LINK', 'SIMILARITY']]
 
 def path_to_image_html(path):
-    return '<img src="https://storage.cloud.google.com/' + path + '?authuser=1" width="200" >'
+    if not path.startswith("https://"):
+        return '<img src="https://storage.cloud.google.com/' + path + '?authuser=1" width="200" >'
+    else:
+        return '<img src="' + path + '" width="200" >'
 
 class SearchKeword(BaseModel):
     keyword: str
@@ -178,7 +181,7 @@ def get_prompt(predefined_prompt:str) -> str:
         2.Select the features that match the above features and **user requirement**.
         3.If there are no matching features, keep the main features in the image.
         4.Create the optimal shopping search keyword using the main characteristics of the item identified above.
-        At this time, include color information if possible and the keyword starts with the type of item.
+        At this time, include 2 or 3 intuitive information such as color if possible and the keyword starts with the type of item.
         
         Now create a "keyword" and the "reason" for creating this keyword in a structured JSON format that matches the following model: {json_model}.
         """

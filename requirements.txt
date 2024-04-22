@@ -18,3 +18,4 @@ langchain-google-alloydb-pg
 langchain-google-vertexai==1.0.1
 google-cloud-alloydb-connector[pg8000]
 psycopg2-binary
+serpapi
