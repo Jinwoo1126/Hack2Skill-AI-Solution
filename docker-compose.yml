@@ -1,0 +1,31 @@
+version: "3"
+services:
+  streamlit-app:
+    container_name: streamlit-app
+    image: "gen-app:latest"
+    volumes:
+      - "/home/kuh1007/project/Hack2Skill/streamlit:/code"
+    networks: 
+      ais_net: 
+        ipv4_address: 172.26.0.4
+    ports:
+      - "8502:8501"
+      - "8885:8888"
+    environment:
+      - DOCKER_NET=172.26.0.5:8000
+      
+  inference-api:
+    container_name: inference-api
+    image: "inference-api:latest"
+    volumes:
+      - "/home/kuh1007/project/Hack2Skill/fastapi:/code"
+    networks: 
+      ais_net: 
+        ipv4_address: 172.26.0.5
+    ports:
+      - "5000:8000"
+
+networks:
+  ais_net:
+    name: genai-project
+    external: true

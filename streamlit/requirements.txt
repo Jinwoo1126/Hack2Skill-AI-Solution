@@ -1,0 +1,22 @@
+python-dotenv
+numpy
+pandas
+requests
+# jupyterlab
+# langchain
+absl-py
+streamlit
+streamlit_image_select
+pydantic-settings==2.2.1
+proto-plus==1.22.2
+protobuf==4.23.0
+google-cloud-storage==2.14.0
+google-cloud
+google-cloud-datastore
+google-cloud-aiplatform==1.47.0
+google-cloud-vision
+# langchain-google-alloydb-pg
+# langchain-google-vertexai==1.0.1
+google-cloud-alloydb-connector[pg8000]
+psycopg2-binary
+sqlalchemy
