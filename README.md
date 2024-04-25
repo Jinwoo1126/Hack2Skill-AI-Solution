@@ -1,4 +1,4 @@
-##Hack2Skill hackathon AI Solution Team
+## Hack2Skill hackathon AI Solution Team
 
 
 ### Set-up docker environment
@@ -17,5 +17,5 @@
         ```
         $ docker compose up -d
 	$ docker compose down
-        ```
+   	```
 
