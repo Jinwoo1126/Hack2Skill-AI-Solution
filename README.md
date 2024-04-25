@@ -16,5 +16,5 @@
     - run and delete containers by docker-compose
         ```
         $ docker compose up -d
-	$ docker compose down
-	```
+        $ docker compose down
+        ```
