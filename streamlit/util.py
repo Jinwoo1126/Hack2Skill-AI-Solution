@@ -208,3 +208,4 @@ def get_masking_img(img, pos):
     mask[left_top_y:right_bottom_y, left_top_x:right_bottom_x] = 255
 
     return mask
+
