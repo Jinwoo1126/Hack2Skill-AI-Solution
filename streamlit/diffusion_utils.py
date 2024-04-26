@@ -39,10 +39,6 @@ def Paint_by_Example_API(base_image, mask_image, example_image):
     init_image = base_image.resize(IMG_SIZE)
     mask_image = mask_image.resize(IMG_SIZE)
     example_image = example_image.resize(IMG_SIZE)
-    #example_image = download_image(example_url).resize(IMG_SIZE)
-    #example_url = "https://raw.githubusercontent.com/Fantasy-Studio/Paint-by-Example/main/examples/image/example_1.png"
-    #example_image = download_image(example_url).resize(IMG_SIZE)
-    
 
     reqest_body = {}
     
