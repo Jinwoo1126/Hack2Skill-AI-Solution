@@ -21,18 +21,7 @@ REC_IMG_SIZE = 200
 
 client = Client(args)
 
-# @st.cache_resource
 def convert_df(input_df):
-    # IMPORTANT: Cache the conversion to prevent computation on every rerun
-    input_df.style.set_table_styles(
-       [{
-           'selector': 'th',
-           'props': [
-               ('background-color', 'lightgrey'),
-               #('color', 'cyan')
-           ]
-       }]
-    )
     return input_df.to_html(escape=False, index=False, justify='center', formatters=dict(ITEM=path_to_image_html, LINK=path_to_image_html))
 
 # streamlit page options
@@ -86,7 +75,7 @@ if uploaded_file is not None:
         st.session_state.image.save(buffer, 'PNG')
         image_bytes = buffer.getvalue()
 
-        img = IMG2IMG_API(image_bytes, prompt)
+        img = IMG2IMG_API(image_bytes, prompt, negative_prompt)
 
         st.session_state.selected_img = img
             
