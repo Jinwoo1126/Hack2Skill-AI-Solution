@@ -68,16 +68,29 @@ if uploaded_file is not None:
     if st.button("Reset", type="primary"):
         st.experimental_rerun()
 
+    
     if st.button("Generation"):
+        st.write("check")
         negative_prompt = "change the shape of the room, do not change sytle, do not add furnitures, keep furnitures in the room, low quality"
 
+        mask = get_tot_masking_img(st.session_state.image.copy())
+        mask_img = Image.fromarray(mask)
+        
         buffer = io.BytesIO()
         st.session_state.image.save(buffer, 'PNG')
         image_bytes = buffer.getvalue()
+        
+        buffer = io.BytesIO()
+        mask_img.save(buffer, 'PNG')
+        mask_bytes = buffer.getvalue()
 
-        img = IMG2IMG_API(image_bytes, prompt, negative_prompt)
+        imgs = client.edit_image_mask(image_bytes, mask_bytes, prompt, negative_prompt)
 
-        st.session_state.selected_img = img
+        img_list = []
+        for res in range(len(imgs.images)):
+            img_list.append(Image.open(io.BytesIO(imgs.images[res]._image_bytes)))
+
+        st.session_state.img_list = img_list
             
     
     if st.button('Style Change'):
