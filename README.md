@@ -18,3 +18,8 @@
         $ docker compose up -d
         $ docker compose down
         ```
+
+### Input Image
+
+
+### Output Image
