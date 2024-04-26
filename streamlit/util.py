@@ -18,18 +18,6 @@ from google.cloud.alloydb.connector import Connector, IPTypes
 
 from PIL import Image, ImageDraw
 
-# from langchain_google_genai import ChatGoogleGenerativeAI
-# from langchain_google_vertexai import ChatVertexAI
-
-
-# from langchain_core.messages import HumanMessage
-# from langchain_core.prompts.image import ImagePromptTemplate
-# from langchain.prompts import PromptTemplate
-# from langchain_core.prompt_values import ImageURL
-# from langchain_core.pydantic_v1 import BaseModel, Field, validator
-# from langchain.output_parsers import PydanticOutputParser
-
-
 
 def load_uploaded_image(uploaded_image) -> (Image, np.array):
     img = Image.open(uploaded_image)
@@ -220,48 +208,3 @@ def get_masking_img(img, pos):
     mask[left_top_y:right_bottom_y, left_top_x:right_bottom_x] = 255
 
     return mask
-
-
-# class TagsForAspects(BaseModel):
-
-#     room_sentiment: list[str] = Field(..., description = "The sentiments of the room");
-
-#     room_color: list[str] = Field(..., description = "The overall atmospheres that depicted to a color");
-
-#     room_size: list[int] = Field(..., description = "room size expressed in square meters", enum = list(range(1, 100)));
-
-#     housing_type: list[str] = Field(..., description = "The type of housing",
-#                               enum = ['studio', 'apartment', 'house']);
-
-#     room_type: list[str] = Field(..., description = "The type of room",
-#                            enum = ['living room', 'kitchen', 'home office', 'bedroom', 'bathroom', 'dining room', 'office', 'garage', 'basement', 'attic', 'laundry room', 'pantry', 'family room', 'foyer']);
-
-
-# class SentenceToAspect:
-
-#     def __init__(self):
-#         GOOGLE_API_KEY = "AIzaSyCVFmbgbdktlHrE9_w3c9CeWo3Dchf6Of0"
-#         self.GOOGLE_API_KEY = GOOGLE_API_KEY
-#         self.llm = ChatGoogleGenerativeAI(
-#             model = 'gemini-pro',
-#             google_api_key = self.GOOGLE_API_KEY,
-#             temperature = 0
-#             )
-
-#         self.parser = PydanticOutputParser(pydantic_object = TagsForAspects)
-#         self.prompt = PromptTemplate(
-#             template = """Answer the user query. \n {format_instructions}\n{query}\n
-
-#             1. You must extract the formatted aspect from each word or keyword within query sentence, rather than the sentence as a whole.
-#             2. Please concentrate metric information if it is considerated in the original human message.
-#             3. If you don't think that there is no appropriate words for those aspects, you must return the word 'none' to the aspect
-#             """,
-#             input_variables = ["query"],
-#             partial_variables = {"format_instructions" : self.parser.get_format_instructions()}
-#         )
-
-#     def query(self, query_sentence: str):
-
-#         chain = self.prompt | self.llm | self.parser
-#         return chain.invoke({"query" : query_sentence})
-
