@@ -1,6 +1,5 @@
 python-dotenv
 numpy
-# pandas
 pillow
 requests
 fastapi
@@ -9,5 +8,4 @@ transformers
 accelerate
 diffusers
 torch
-# pydantic-settings==2.2.1
 

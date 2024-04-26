@@ -1,10 +1,10 @@
 import uvicorn
 import os
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import FastAPI
 
-from starlette import status
-from starlette.requests import Request
-from starlette.responses import JSONResponse, Response
+#from starlette import status
+#from starlette.requests import Request
+#from starlette.responses import JSONResponse, Response
 
 from routers import inference
 from model import diffusion_model

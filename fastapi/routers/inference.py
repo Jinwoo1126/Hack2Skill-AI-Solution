@@ -36,21 +36,6 @@ def get_health() -> Response:
 
 
 @router.post(
-    "/test",
-    summary="test api",
-    description="",
-)
-def test_predict() -> bytes:
-    image = Image.open('./saved_image.jpg')
-    image = image.resize(IMG_SIZE)
-
-    image_bytes = image2bytes(image)
-    encoded_bytes = base64.b64encode(image_bytes) 
-    return encoded_bytes.decode('ascii')
-
-
-
-@router.post(
     "/",
     summary="Paint-by-Example model inference",
     description="",
@@ -60,10 +45,6 @@ def predict(inputs:Input) -> bytes:
     base_image = Image.open(io.BytesIO(base64.b64decode(inputs.base_bytes)))
     mask_image = Image.open(io.BytesIO(base64.b64decode(inputs.mask_bytes)))
     example_image = Image.open(io.BytesIO(base64.b64decode(inputs.example_bytes)))
-    
-    # base_image = base_image.resize(IMG_SIZE)
-    # mask_image = mask_image.resize(IMG_SIZE)
-    # example_image = example_image.resize(IMG_SIZE)
 
     image = diffusion_model.pipe(
                 image=base_image,

@@ -29,6 +29,7 @@ class Model:
         @app.on_event("shutdown")
         def shutdown():
             self.pipe = None
+            self.img2img_pipe = None
 
 diffusion_model = Model()
 
