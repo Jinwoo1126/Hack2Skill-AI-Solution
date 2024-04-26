@@ -208,4 +208,19 @@ def get_masking_img(img, pos):
     mask[left_top_y:right_bottom_y, left_top_x:right_bottom_x] = 255
 
     return mask
+    
+def get_tot_masking_img(img, margin_ratio:int=0.2):
+    height, width, dim = np.shape(img)
+    
+    # 마스크를 적용할 영역 계산
+    margin_x = int(width * margin_ratio)  # 너비의 10% 여백
+    margin_y = int(height * margin_ratio)  # 높이의 10% 여백
+    left_top_x = margin_x
+    left_top_y = margin_y
+    right_bottom_x = width - margin_x
+    right_bottom_y = height - margin_y
+    
+    mask = np.zeros((height, width), dtype=np.uint8)
+    mask[left_top_y:right_bottom_y, left_top_x:right_bottom_x] = 255
 
+    return mask
