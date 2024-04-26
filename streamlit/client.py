@@ -156,6 +156,34 @@ class Client:
         )
     
         return images
+
+    
+    def edit_image_mask(self,
+                        image,
+                        mask,
+                        prompt: str, 
+                        negative_prompt: str,
+                        guidance_scale:int=21,
+                        number_of_images:int=4) -> vertexai.preview.vision_models.ImageGenerationResponse:
+    
+        from vertexai.preview.vision_models import Image
+        
+        model = ImageGenerationModel.from_pretrained("imagegeneration@006")
+        
+        base_img = Image(image)
+        mask_img = Image(mask)
+    
+        images = model.edit_image(
+            base_image=base_img,
+            mask=mask_img,
+            prompt=prompt,
+            guidance_scale=guidance_scale,
+            negative_prompt=negative_prompt,
+            number_of_images=number_of_images,
+        )
+    
+        return images
+                            
         
     def stable_diffusion_xl(self,
                             project: str,
