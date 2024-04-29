@@ -1,5 +1,8 @@
 ## Hack2Skill hackathon AI Solution Team
+We spent two weeks developing our AI solution for this [GenAI Hackathon APAC Edition](https://hack2skill.com/genai_hackathon_apac_edition?utm_medium=H2Ssocial&utm_source=H2Ssocial) to solve a real-world problem in retail and e-commerce. We've built cutting-edge applications to solve problems with tools like Vertex AI, Duet AI, GenAI App Builder, Model Garden, and more.
 
+### Streamlit Demo
+[Interior AI Solution](http://34.64.68.13:8502/)
 
 ### Set-up docker environment
 1. create docker network 
